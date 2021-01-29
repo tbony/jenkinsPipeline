@@ -1,9 +1,13 @@
 pipeline {
-    agent { docker { image 'maven:3.3.3' } }
+	agent any
     stages {
         stage('build') {
             steps {
-                sh 'mvn --version'
+            	sh 'git checkout main'
+                sh 'echo "hey" > test.scala'
+                sh 'git add test.scala'
+                sh 'git commit -am "test: adding a new file"'
+                sh 'git push'
             }
         }
     }
